@@ -886,23 +886,23 @@ else()
     if(EMSCRIPTEN OR IOS)
       unset(unity_lib_dependency)
       list(APPEND unity_objlib_dependency
-        # Link selected object libs directly instead of ${draco_plugin_dependency}
-        # minimizes build size
-        # results in a single static lib file
-        draco_attributes
-        draco_compression_attributes_dec
-        draco_compression_bit_coders
-        draco_compression_decode
-        draco_compression_entropy
-        draco_compression_mesh_dec
-        draco_compression_point_cloud_dec
-        draco_core
-        draco_mesh
-        draco_metadata
-        draco_metadata_dec
-        draco_point_cloud
-        draco_points_dec
-      )
+                  # Link selected object libs directly instead of
+                  # ${draco_plugin_dependency}
+                  # minimizes build size
+                  # results in a single static lib file
+                  draco_attributes
+                  draco_compression_attributes_dec
+                  draco_compression_bit_coders
+                  draco_compression_decode
+                  draco_compression_entropy
+                  draco_compression_mesh_dec
+                  draco_compression_point_cloud_dec
+                  draco_core
+                  draco_mesh
+                  draco_metadata
+                  draco_metadata_dec
+                  draco_point_cloud
+                  draco_points_dec)
     endif()
 
     draco_add_library(NAME
@@ -916,8 +916,7 @@ else()
                       OBJLIB_DEPS
                       ${unity_objlib_dependency}
                       LIB_DEPS
-                      ${unity_lib_dependency}
-                      )
+                      ${unity_lib_dependency})
 
     draco_add_library(NAME
                       dracoenc_unity
@@ -938,37 +937,41 @@ else()
       set_target_properties(dracoenc_unity PROPERTIES BUNDLE true)
     endif()
     if(IOS)
-      # Workaround to ensure bitcode is generated when
-      # generating an iOS library with Makefiles as generator.
-      target_compile_options( dracodec_unity PUBLIC -fembed-bitcode )
-      target_compile_options( draco_attributes PUBLIC -fembed-bitcode )
-      target_compile_options( draco_compression_attributes_dec PUBLIC -fembed-bitcode )
-      target_compile_options( draco_compression_bit_coders PUBLIC -fembed-bitcode )
-      target_compile_options( draco_compression_decode PUBLIC -fembed-bitcode )
-      target_compile_options( draco_compression_entropy PUBLIC -fembed-bitcode )
-      target_compile_options( draco_compression_mesh_dec PUBLIC -fembed-bitcode )
-      target_compile_options( draco_compression_point_cloud_dec PUBLIC -fembed-bitcode )
-      target_compile_options( draco_core PUBLIC -fembed-bitcode )
-      target_compile_options( draco_dec_config PUBLIC -fembed-bitcode )
-      target_compile_options( draco_io PUBLIC -fembed-bitcode )
-      target_compile_options( draco_mesh PUBLIC -fembed-bitcode )
-      target_compile_options( draco_metadata PUBLIC -fembed-bitcode )
-      target_compile_options( draco_metadata_dec PUBLIC -fembed-bitcode )
-      target_compile_options( draco_point_cloud PUBLIC -fembed-bitcode )
-      target_compile_options( draco_points_dec PUBLIC -fembed-bitcode )
-      target_compile_options( draco_unity_plugin PUBLIC -fembed-bitcode )
+      # Workaround to ensure bitcode is generated when generating an iOS library
+      # with Makefiles as generator.
+      target_compile_options(dracodec_unity PUBLIC -fembed-bitcode)
+      target_compile_options(draco_attributes PUBLIC -fembed-bitcode)
+      target_compile_options(draco_compression_attributes_dec
+                             PUBLIC -fembed-bitcode)
+      target_compile_options(draco_compression_bit_coders
+                             PUBLIC -fembed-bitcode)
+      target_compile_options(draco_compression_decode PUBLIC -fembed-bitcode)
+      target_compile_options(draco_compression_entropy PUBLIC -fembed-bitcode)
+      target_compile_options(draco_compression_mesh_dec PUBLIC -fembed-bitcode)
+      target_compile_options(draco_compression_point_cloud_dec
+                             PUBLIC -fembed-bitcode)
+      target_compile_options(draco_core PUBLIC -fembed-bitcode)
+      target_compile_options(draco_dec_config PUBLIC -fembed-bitcode)
+      target_compile_options(draco_io PUBLIC -fembed-bitcode)
+      target_compile_options(draco_mesh PUBLIC -fembed-bitcode)
+      target_compile_options(draco_metadata PUBLIC -fembed-bitcode)
+      target_compile_options(draco_metadata_dec PUBLIC -fembed-bitcode)
+      target_compile_options(draco_point_cloud PUBLIC -fembed-bitcode)
+      target_compile_options(draco_points_dec PUBLIC -fembed-bitcode)
+      target_compile_options(draco_unity_plugin PUBLIC -fembed-bitcode)
     endif()
-    if (WIN32 AND ${CMAKE_SYSTEM_NAME} STREQUAL "WindowsStore")
-      # Ignoring Error C4146 unary minus operator applied to unsigned type, result still unsigned
-      target_compile_options(draco_compression_attributes_enc PRIVATE "/wd4146" )
-      target_compile_options(draco_compression_bit_coders PRIVATE "/wd4146" )
-      target_compile_options(draco_compression_entropy PRIVATE "/wd4146" )
-      target_compile_options(draco_compression_mesh_dec PRIVATE "/wd4146" )
-      target_compile_options(draco_compression_mesh_enc PRIVATE "/wd4146" )
-      target_compile_options(draco_core PRIVATE "/wd4146" )
-      target_compile_options(draco_io PRIVATE "/wd4146" )
-      target_compile_options(draco_metadata_dec PRIVATE "/wd4146" )
-      target_compile_options(draco_metadata_enc PRIVATE "/wd4146" )
+    if(WIN32 AND ${CMAKE_SYSTEM_NAME} STREQUAL "WindowsStore")
+      # Ignoring Error C4146 unary minus operator applied to unsigned type,
+      # result still unsigned
+      target_compile_options(draco_compression_attributes_enc PRIVATE "/wd4146")
+      target_compile_options(draco_compression_bit_coders PRIVATE "/wd4146")
+      target_compile_options(draco_compression_entropy PRIVATE "/wd4146")
+      target_compile_options(draco_compression_mesh_dec PRIVATE "/wd4146")
+      target_compile_options(draco_compression_mesh_enc PRIVATE "/wd4146")
+      target_compile_options(draco_core PRIVATE "/wd4146")
+      target_compile_options(draco_io PRIVATE "/wd4146")
+      target_compile_options(draco_metadata_dec PRIVATE "/wd4146")
+      target_compile_options(draco_metadata_enc PRIVATE "/wd4146")
     endif()
   endif()
 
