@@ -120,5 +120,11 @@ macro(draco_set_build_definitions)
     draco_get_required_emscripten_flags(FLAG_LIST_VAR draco_base_cxx_flags)
   endif()
 
+  if(IOS)
+    # ensure bitcode is generated when generating an iOS library with Makefiles
+    # as generator.
+    list(APPEND draco_base_cxx_flags "-fembed-bitcode")
+  endif()
+
   draco_configure_sanitizer()
 endmacro()
