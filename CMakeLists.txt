@@ -1053,7 +1053,7 @@ else()
   endif()
 
   if(DRACO_UNITY_PLUGIN)
-    if(IOS OR EMSCRIPTEN)
+    if(IOS OR EMSCRIPTEN OR CMAKE_SYSTEM_NAME STREQUAL "visionOS")
       set(unity_decoder_lib_type STATIC)
     else()
       set(unity_decoder_lib_type MODULE)
